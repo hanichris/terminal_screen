@@ -9,10 +9,12 @@
  * @chunk: pointer to a 'Chunk' type that the VM needs to execute.
  * @ip: instruction pointer. Keeps track of the location of the
  * instruction currently being executed.
+ * @screen: pointer to a multidimensional array that acts as a display screen.
  */
 typedef struct vm_t {
 	Chunk* chunk;
 	uint8_t* ip;
+	uint8_t** screen;
 } VM;
 
 /**
