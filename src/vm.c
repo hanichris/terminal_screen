@@ -1,8 +1,10 @@
-#include "include/vm.h"
 #include "include/debug.h"
+#include "include/vm.h"
 
 void initVM(VM* vm) {
-
+	vm->ip = nullptr;
+	initChunk(vm->chunk);
+	initScreen(vm->screen);
 }
 
 void freeVM(VM* vm) {
