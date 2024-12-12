@@ -18,18 +18,23 @@
 static void deserializeChunk(void* buffer, Chunk* chunk) {
 	size_t capacitySize = sizeof(chunk->capacity);
 	size_t countSize = sizeof(chunk->count);
-	chunk->code = malloc(countSize);
-	if (!chunk->code) {
-		fprintf(stderr, "Failed to allocate memory for code chunk of size %zu.\n", countSize);
-		exit(EXIT_FAILURE);
-	}
 
 	size_t offset = 0;
 	memcpy(&chunk->capacity, buffer, capacitySize);
 	offset += capacitySize;
 	memcpy(&chunk->count, buffer + offset, countSize);
 	offset += countSize;
-	memcpy(chunk->code, buffer + offset, chunk->count);
+
+	size_t arSize = (chunk->count * sizeof(uint8_t));
+	chunk->code = malloc(arSize);
+	if (!chunk->code) {
+		fprintf(stderr, "Failed to allocate block of memory of size %zu.\n", arSize);
+		chunk->count = 0;
+		chunk->capacity = 0;
+		return;
+	}
+
+	memcpy(chunk->code, buffer + offset, chunk->count);	
 }
 
 int main(void) {
@@ -78,7 +83,7 @@ int main(void) {
 			printf("EOF.\n");
 		else {
 			deserializeChunk(buffer, &chunk);
-			
+			printf("No. of bytes received. %zu\n", bufSize);	
 			printf("Chunk capacity: %u\n", chunk.capacity);
 			printf("Chunk filled slots: %u\n", chunk.count);
 			for (unsigned i = 0; i < chunk.count; i++){
