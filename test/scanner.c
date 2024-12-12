@@ -41,7 +41,7 @@ static Token makeToken(Scanner* scanner, TokenType type) {
 
 static Token errorToken(Scanner* scanner, char const* message) {
 	Token token = (Token) {
-		.type = TOKEN_EOF,
+		.type = TOKEN_ERROR,
 		.start = message,
 		.length = (unsigned)strlen(message)
 	};
