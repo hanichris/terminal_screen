@@ -22,8 +22,6 @@ static InterpretResult run(VM* vm) {
 #endif
 		uint8_t instruction = READ_BYTE();
 		switch (instruction) {
-			case EOS:
-				return INTERPRET_OK;
 			case SS: {
 					 [[maybe_unused]]uint8_t length = READ_BYTE();
 					 uint8_t screenWidth = READ_BYTE();
@@ -66,6 +64,10 @@ static InterpretResult run(VM* vm) {
 					  }
 					  break;
 				  }
+			case END:
+				  return INTERPRET_EOF;
+			case EOS:
+				  return INTERPRET_OK;
 		}
 	}
 #undef READ_BYTE
