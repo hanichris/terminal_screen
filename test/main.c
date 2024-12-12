@@ -3,13 +3,7 @@
 static void* serializeChunk(Chunk* chunk, size_t* bufSize) {
 	size_t capacitySize = sizeof(chunk->capacity);
 	size_t countSize = sizeof(chunk->count);
-	*bufSize = capacitySize + countSize + chunk->count;
-	printf("Current chunk entries: \n");
-	for (unsigned i = 0; i < chunk->count; i++) {
-		printf("%u ", chunk->code[i]);
-	}
-	printf("\n");
-
+	*bufSize = capacitySize + countSize + (chunk->count * sizeof(uint8_t));
 	void* buffer = malloc(*bufSize);
 	if (!buffer) {
 		fprintf(stderr, "Failed to allocate buffer memory of size %zu.\n", *bufSize);
