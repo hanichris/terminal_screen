@@ -4,6 +4,7 @@
 #include "common.h"
 
 constexpr uint8_t EOS = 0xff;  // End of file. Marks the end of binary stream.
+constexpr uint8_t END = 0xfa;  // End of statement.
 constexpr uint8_t CLR = 0x7;   // Clear Screen.
 constexpr uint8_t DAC = 0x6;   // Draw At Cursor. Draws a character at the cursor location.
 constexpr uint8_t CM = 0x5;    // Cursor Movement. Move the cursor to specified location.

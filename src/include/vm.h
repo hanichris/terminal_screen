@@ -24,6 +24,7 @@ typedef struct vm_t {
  */
 typedef enum {
 	INTERPRET_OK,
+	INTERPRET_EOF,
 	INTERPRET_ERROR,
 } InterpretResult;
 
