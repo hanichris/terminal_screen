@@ -33,7 +33,7 @@ $(BUILD_DIR)/$(PRODUCER_EXEC): $(TEST_OBJS)
 
 $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CPPFLAGS) -std=gnu23 -Wall -c $< -o $@
+	$(CC) $(CPPFLAGS) -std=gnu23 -Wall -O3 -c $< -o $@
 
 clean:
 	rm -r $(BUILD_DIR)
