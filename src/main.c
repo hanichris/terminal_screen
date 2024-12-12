@@ -1,19 +1,13 @@
-/*
-#include "include/chunk.h"
-#include "include/debug.h"
-#include "include/vm.h"
-*/
-#include <err.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
-#include <sysexits.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/uio.h>
 #include <unistd.h>
 
-#include "include/chunk.h"
+//#include "include/debug.h"
+#include "include/vm.h"
 
 static void deserializeChunk(void* buffer, Chunk* chunk) {
 	size_t capacitySize = sizeof(chunk->capacity);
@@ -38,14 +32,8 @@ static void deserializeChunk(void* buffer, Chunk* chunk) {
 }
 
 int main(void) {
-	/*VM vm = {};
-	Chunk chunk = {};
 	//disassembleChunk(&chunk, "test chunk");
-	interpret(&vm, &chunk);
 	
-	freeVM(&vm);
-	freeChunk(&chunk);
-	*/
 	char const* filePath = "/tmp/myfifo";
 	if (access(filePath, F_OK) == -1) {
 		if (mkfifo(filePath, 0666) == -1){
@@ -59,6 +47,8 @@ int main(void) {
 	}
 
 	Chunk chunk = { };
+	VM vm = {};
+	initVM(&vm);
 	for (;;) {
 		size_t bufSize = 0;
 		int byteCount = read(fd, &bufSize, sizeof(bufSize));
@@ -66,7 +56,7 @@ int main(void) {
 			fprintf(stderr, "Failed to read the expected buffer size.\n");
 			break;
 		} else if (byteCount == 0) {
-			printf("EOF.\n");
+			printf("EOS.\n");
 			break;
 		}
 
@@ -83,17 +73,13 @@ int main(void) {
 			printf("EOF.\n");
 		else {
 			deserializeChunk(buffer, &chunk);
-			printf("No. of bytes received. %zu\n", bufSize);	
-			printf("Chunk capacity: %u\n", chunk.capacity);
-			printf("Chunk filled slots: %u\n", chunk.count);
-			for (unsigned i = 0; i < chunk.count; i++){
-				printf("[%u]: %u\n", i, chunk.code[i]);
-			}
+			interpret(&vm, &chunk);
 		}
 
 		free(buffer);
 		freeChunk(&chunk);
 	}
+	freeVM(&vm);
 	if (close(fd) == -1) {
 		err(EX_IOERR, "Failed to close '%s'", filePath);
 	}
