@@ -32,6 +32,13 @@ typedef struct screen_t {
 } Screen;
 
 /**
+ * printScreen - prints out the current buffer of the screen to the terminal.
+ * @screen: pointer to a 'Screen' type.
+ * @Returns: void.
+ */
+void printScreen(Screen* screen);
+
+/**
  * initScreen - initialises a 'Screen' type to ensure it is in a valid state
  * before use.
  * @screen: pointer to a 'Screen' type.
@@ -88,4 +95,29 @@ void setCursor(Screen* screen, uint8_t x, uint8_t y);
  * @Returns: void.
  */
 void drawAtCursor(Screen* screen, uint8_t character, uint8_t colourIndex);
+/**
+ * renderText = renders a text of string whose length is not greater than 252 characters
+ * on the screen starting at the coordinates (x,y).
+ * @screen: pointer to a 'Screen' type.
+ * @x: x-coordinate of the starting point of the string to be rendered.
+ * @y: y-coordinate of the starting point of the string to be rendered.
+ * @colourIndex:the colour index to use during rendering of the string.
+ * @str: the string to be rendered (only ASCII characters are supported).
+ * @len: length of the string to be rendered.
+ * @Returns: void.
+ * */
+void renderText(Screen* screen, uint8_t x, uint8_t y, uint8_t colourIndex, uint8_t* str, uint8_t len);
+/**
+ * drawLine - draws a line on the screen starting at coordinate (x0, y0) to coordinate (x1, y1) in the
+ * desired colour using the provided character as a line.
+ * @screen: pointer to a 'Screen' type.
+ * @x_0: x-coordinate of the starting point of the line.
+ * @y_0: y-coordinate of the starting point of the line.
+ * @x_1: x-coordinate of the ending point of the line.
+ * @y_1: y-coordinate of the ending point of the line.
+ * @colourIndex: the colour index to use when rendering the line.
+ * @character: the character to draw the line using.
+ * @Returns: void.
+ */
+void drawLine(Screen* screen, uint8_t x_0, uint8_t y_0, uint8_t x_1, uint8_t y_1, uint8_t colourIndex, uint8_t character);
 #endif
