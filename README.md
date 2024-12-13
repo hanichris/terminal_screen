@@ -42,6 +42,7 @@ Given the two executables exist as separate, dependent processes running on the 
 
 > [!NOTE]  
 > Terminal Screen was tested on Mac OS. It uses gcc as the compiler of choice. Ensure the environment variable CC on your system points to gcc version 14.2.0 and above otherwise the program will not compile as it uses expressions only available on this version.
+> The Makefile has a CC variable pointing to gcc-14. Ensure when you run it on your system, this variable points to where the C compiler that understands C23 is located on your system.
 
 ### Demo.
 
