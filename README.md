@@ -103,6 +103,7 @@ These and other commands are supported in the REPL.
 | Move cursor    | move(x, y);                                    | Moves the cursor without drawing on the screen.               |
 | Draw at cursor | dcur(ASCII character, colour);                 | Draws a character at the cursor location.                     |
 | Clear Screen.  | clear();                                       | Clears the screen.                                            |
+| End of File    | ^D                                             | Marks the end of the stream.                                  |
 
 > [!NOTE]  
 > Given that the stream is an array of bytes, the dimensions and coordinates can only be between 0 and 255.
