@@ -34,7 +34,7 @@ static void repl() {
 	char* line = nullptr;
 	size_t linecap = 0;
 	for (;;) {
-		printf("> ");
+		printf(">>> ");
 		if (getline(&line, &linecap, stdin) == -1) {
 			if (feof(stdin)) {
 				break;
