@@ -110,7 +110,7 @@ These and other commands are supported in the REPL.
 > [!NOTE]
 > Only three screen colour settings are supported: 0x00 for **_MONOCHROME_**, 0x01 for **_16 colours_**, and 0x02 for **_256 colours_**.
 
-When using 4-bite colours (0x01):
+When using 4-bit colours (0x01), the following are the valid colour indexes:
 | Color Name | Color Code |
 | :--------- | :-------------------- |
 | Black | `30` |
@@ -130,5 +130,5 @@ When using 4-bite colours (0x01):
 | Bright Cyan | `96` |
 | Bright White | `97` |
 
-When using 8-bit colours (0x02):
+When using 8-bit colours (0x02), the following are the valid colour indexes:
 ![256 Color table](https://user-images.githubusercontent.com/995050/47952855-ecb12480-df75-11e8-89d4-ac26c50e80b9.png)
