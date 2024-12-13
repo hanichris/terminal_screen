@@ -47,16 +47,11 @@ void printScreen(Screen* screen) {
 
 void screenSetup(Screen* screen, uint8_t width, uint8_t height, ColourMode mode) {
 	size_t oldSize = screen->width * screen->height;
-	bool initialise = true;
-	if (screen->pixels) {
-		initialise = false;
-	}
 	screen->pixels = GROW_ARRAY(uint16_t, screen->pixels, oldSize, width * height);
 	screen->mode = mode;
 	screen->width = width;
 	screen->height = height;
-	if (initialise)
-		memset(screen->pixels, ' ', width * height * sizeof(uint16_t));
+	memset(screen->pixels, ' ', width * height * sizeof(uint16_t));
 }
 
 void drawCharacter(Screen* screen, uint8_t x, uint8_t y, uint8_t colourIndex, uint8_t character) {
